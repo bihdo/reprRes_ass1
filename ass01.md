@@ -10,14 +10,14 @@ First I read the activity.csv file:
 data = read.csv("activity.csv")
 ```
 
-Than I plot the histogram and calculate mean and median:
+I plot the histogram and calculate mean and median:
 
 
 ```r
 dataFactor <- as.factor(data$date)
 stepsPerDay <- by(data$steps,dataFactor,sum, na.rm = F)
 
-histogram = hist(stepsPerDay, breaks = 100)
+histogram = hist(stepsPerDay, breaks = 100, col="lightblue", xlab = "Number of steps taken a day", main = "Histogram of number of steps per day")
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
@@ -40,4 +40,49 @@ medianValue
 ## [1] 10765
 ```
 
+Replacing missing data with averages:
+
+
+```r
+numOfNAs <- sum(is.na(data$steps))
+dataWithourNAs <- data
+averagePerDay <- by(data$steps,dataFactor,mean, na.rm = F)
+
+for(i in 1:nrow(data)){
+    if(is.na(data$steps[i])){
+        ind <- floor(i/208)+1
+        dataWithourNAs$steps[i] <- averagePerDay[ind]
+    }
+}
+```
+
+I plot the histogram and calculate mean and median:
+
+
+```r
+dataFactor2 <- as.factor(dataWithourNAs$date)
+stepsPerDay2 <- by(dataWithourNAs$steps,dataFactor2,sum, na.rm = F)
+
+histogram = hist(stepsPerDay2, breaks = 100, col="lightblue", xlab = "Number of steps taken a day", main = "Histogram of number of steps per day")
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+
+```r
+meanValue2 = mean(stepsPerDay2, na.rm = T)
+meanValue2
+```
+
+```
+## [1] 10895
+```
+
+```r
+medianValue2 = median(stepsPerDay2, na.rm = T)
+medianValue2
+```
+
+```
+## [1] 11015
+```
 
