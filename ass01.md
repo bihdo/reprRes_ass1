@@ -1,23 +1,22 @@
 First assignment
 ========================================================
 
+Since I have only joined this course on the last day of submission, I only had time to start this assignment. :(
+
 First I read the activity.csv file:
 
 
 ```r
 data = read.csv("activity.csv")
-#head(data)
 ```
 
-I plot a histogram and calculate mean and median:
+Than I plot the histogram and calculate mean and median:
 
 
 ```r
 dataFactor <- as.factor(data$date)
 stepsPerDay <- by(data$steps,dataFactor,sum, na.rm = F)
-#stepsPerDay
 
-#str(stepsPerDay)
 histogram = hist(stepsPerDay, breaks = 100)
 ```
 

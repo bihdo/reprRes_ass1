@@ -181,19 +181,18 @@ hljs.initHighlightingOnLoad();
 <body>
 <h1>First assignment</h1>
 
+<p>Since I have only joined this course on the last day of submission, I only had time to start this assignment. :(</p>
+
 <p>First I read the activity.csv file:</p>
 
 <pre><code class="r">data = read.csv(&quot;activity.csv&quot;)
-#head(data)
 </code></pre>
 
-<p>I plot a histogram and calculate mean and median:</p>
+<p>Than I plot the histogram and calculate mean and median:</p>
 
 <pre><code class="r">dataFactor &lt;- as.factor(data$date)
 stepsPerDay &lt;- by(data$steps,dataFactor,sum, na.rm = F)
-#stepsPerDay
 
-#str(stepsPerDay)
 histogram = hist(stepsPerDay, breaks = 100)
 </code></pre>
 
